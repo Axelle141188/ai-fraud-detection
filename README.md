@@ -32,7 +32,7 @@ by combining two complementary ML models with behavioral psychology analysis.
 
 ```bash
 # 1. Clone le repository
-git clone https://github.com/TON_USERNAME/ai-fraud-detection
+git clone https://github.com/Axelle141188/ai-fraud-detection
 cd ai-fraud-detection
 
 # 2. Installe les dépendances
