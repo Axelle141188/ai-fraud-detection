@@ -8,6 +8,7 @@ class DataProcessor:
         self.data_dir = 'data'
         self.filepath = os.path.join(self.data_dir, 'creditcard.csv')
         self.scaler = StandardScaler()
+
     def load_data(self):
         """Charge le dataset creditcard.csv"""
         if not os.path.exists(self.filepath):
@@ -28,6 +29,7 @@ class DataProcessor:
             
         print(f" Fraudes : {df['Class'].sum()}")
         return df
+
     def clean_data(self, df):
         """Nettoie et vérifie les données"""
         # Supprimer les doublons
@@ -45,23 +47,27 @@ class DataProcessor:
         
         print(f"✅ Données nettoyées : {len(df)} transactions conservées")
         return df
+
     def prepare_features(self, df):
         """Normalise les données et sépare features et target"""
-        df = df.copy()
-        df['Amount_scaled'] = self.scaler.fit_transform(df[['Amount']])
-        df['Time_scaled'] = self.scaler.fit_transform(df[['Time']])
+        df_ml = df.copy()
+        df_ml['Amount_scaled'] = self.scaler.fit_transform(df_ml[['Amount']])
+        df_ml['Time_scaled'] = self.scaler.fit_transform(df_ml[['Time']])
         
         # Supprimer les colonnes originales non normalisées
-        df = df.drop(['Amount', 'Time'], axis=1)
+        df_ml = df_ml.drop(['Amount', 'Time'], axis=1)
         
         # Séparer features et target
-        X = df.drop('Class', axis=1)
-        y = df['Class']
+        X = df_ml.drop('Class', axis=1)
+        y = df_ml['Class']
         
         print(f"✅ Features préparées : {X.shape[1]} variables")
         return X, y
+
     def get_quick_stats(self, df):
-        """Calcule les statistiques clés pour le dashboard"""
+        """Calcule les statistiques clés pour le dashboard
+        IMPORTANT: df doit contenir la colonne Amount originale (non normalisée)
+        """
         stats = {
             'total_transactions': len(df),
             'total_fraud': int(df['Class'].sum()),
@@ -73,12 +79,19 @@ class DataProcessor:
         return stats
     
     def process_all(self):
-        """Enchaîne toutes les étapes en une seule commande"""
+        """Enchaîne toutes les étapes en une seule commande
+        Retourne df_original (avec Amount en euros), X (features ML), y (target)
+        """
         df = self.load_data()
         if df.empty:
             return None, None, None
         df = self.clean_data(df)
+        
+        # On garde df intact pour les stats et l'affichage
+        # On prépare X, y séparément pour le ML
         X, y = self.prepare_features(df)
+        
+        # df conserve Amount original en euros — utilisé pour les stats
         return df, X, y
 
 
