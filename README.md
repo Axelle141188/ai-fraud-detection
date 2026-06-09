@@ -1,5 +1,7 @@
 # 🔴 AI Fraud Detection System
 
+🚀 **Live Demo** : [axelle-fraud-detection.streamlit.app](https://axelle-fraud-detection.streamlit.app)
+
 A machine learning system that detects fraudulent banking transactions
 by combining two complementary ML models with behavioral psychology analysis.
 
@@ -38,9 +40,8 @@ cd ai-fraud-detection
 # 2. Installe les dépendances
 pip install -r requirements.txt
 
-# 3. Télécharge le dataset
-# https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
-# Place creditcard.csv dans le dossier data/
+# 3. Le dataset est téléchargé automatiquement depuis Kaggle au premier lancement
+# Assurez-vous d'avoir configuré vos credentials Kaggle
 
 # 4. Lance le dashboard
 streamlit run src/dashboard.py
@@ -109,6 +110,7 @@ suspicious transaction using psychological analysis.
 
 - **Source :** [Kaggle Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
 - **Size :** 284,807 transactions (September 2013, European cardholders)
+Average fraud amount : €123.87 | Maximum fraud amount : €2,125.87
 - **Features :** 30 variables (V1-V28 PCA-transformed + Time + Amount)
 - **Fraud rate :** 0.17% (492 fraudulent transactions)
 
