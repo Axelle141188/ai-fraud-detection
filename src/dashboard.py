@@ -69,7 +69,7 @@ with col1:
     st.metric(" Total Transactions", 
               f"{stats['total_transactions']:,}")
 with col2:
-    st.metric(" Fraudes Détectées", 
+    st.metric(" Transactions frauduleuses", 
               f"{stats['total_fraud']:,}")
 with col3:
     st.metric(" Taux de Fraude", 
@@ -89,7 +89,7 @@ with col_lr:
     st.metric("Recall", f"{metrics_lr['recall']*100:.1f}%")
     st.metric("F1-Score", f"{metrics_lr['f1_score']*100:.1f}%")
     st.metric("ROC-AUC", f"{metrics_lr['roc_auc']*100:.1f}%")
-    st.success("✅ Modèle recommandé pour la production")
+    st.success("✅ Meilleur modèle évalué dans ce prototype")
 
 with col_if:
     st.markdown("**Isolation Forest**")

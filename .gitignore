@@ -1,3 +1,6 @@
 data/creditcard.csv
 data/creditcard_clean.csv
 data/*.pkl
+__pycache__/
+*.pyc
+*_before_final_cleanup.py

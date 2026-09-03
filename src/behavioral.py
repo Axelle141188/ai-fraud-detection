@@ -17,8 +17,8 @@ class BehavioralAnalyzer:
                 'color': '#ff4444'
             },
             'impulsive': {
-                'name': 'Fraudeur Impulsif',
-                'description': 'Agit sans planification, montants élevés, horaires atypiques',
+                'name': 'Profil à risque - Impulsif',
+                'description': 'Montant élevé combiné à un horaire atypique dans les règles du prototype',
                 'indicators': ['high_amount', 'night_hours', 'single_transaction'],
                 'color': '#ff0000'
             },
@@ -37,7 +37,7 @@ class BehavioralAnalyzer:
             return {
                 'period': 'Nuit profonde',
                 'risk_level': 'ÉLEVÉ',
-                'psychological_note': 'Horaire typique des attaques automatisées ou fraudeurs internationaux évitant la détection humaine',
+                'psychological_note': 'Horaire atypique augmentant le score de risque et nécessitant une vérification supplémentaire',
                 'hour': int(hour)
             }
         elif 6 <= hour <= 9:
@@ -88,7 +88,7 @@ class BehavioralAnalyzer:
             return {
                 'category': 'Transaction élevée',
                 'risk_level': 'ÉLEVÉ',
-                'psychological_note': 'Comportement impulsif ou fraudeur expérimenté très confiant — urgence de bloquer immédiatement',
+                'psychological_note': 'Montant important augmentant le niveau de risque. Contexte et historique client à vérifier.',
                 'ratio_to_avg': round(amount / avg_fraud_amount, 2)
             }
     def get_behavioral_profile(self, amount, time_seconds):

@@ -107,9 +107,9 @@ class DataProcessor:
             'total_transactions': len(df),
             'total_fraud': int(df['Class'].sum()),
             'fraud_rate': round(df['Class'].mean() * 100, 4),
-            'avg_fraud_amount': round(df[df['Class']==1]['Amount'].mean(), 2),
-            'avg_normal_amount': round(df[df['Class']==0]['Amount'].mean(), 2),
-            'max_fraud_amount': round(df[df['Class']==1]['Amount'].max(), 2)
+            'avg_fraud_amount': round(df[df['Class']==1]['Amount'].mean() * 250.1196703376102 + 88.34961929394436, 2),
+            'avg_normal_amount': round(df[df['Class']==0]['Amount'].mean() * 250.1196703376102 + 88.34961929394436, 2),
+            'max_fraud_amount': round(df[df['Class']==1]['Amount'].max() * 250.1196703376102 + 88.34961929394436, 2)
         }
         return stats
 
