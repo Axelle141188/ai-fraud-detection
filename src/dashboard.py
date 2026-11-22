@@ -39,12 +39,11 @@ def load_or_train_models(X, y):
         from sklearn.model_selection import train_test_split
         _, X_test, _, y_test = train_test_split(
             X, y, test_size=0.2, random_state=42, stratify=y)
-        metrics_lr = {'model_name': 'Logistic Regression',
-                     'precision': 0.913, 'recall': 0.913,
-                     'f1_score': 0.913, 'roc_auc': 0.956}
-        metrics_if = {'model_name': 'Isolation Forest',
-                     'precision': 0.258, 'recall': 0.258,
-                     'f1_score': 0.258, 'roc_auc': 0.628}
+        # Metrics computed on the held-out test set (never hard-coded)
+        metrics_lr = models.evaluate_model(
+            models.logistic_model, X_test, y_test, 'Logistic Regression')
+        metrics_if = models.evaluate_model(
+            models.isolation_model, X_test, y_test, 'Isolation Forest')
         return metrics_lr, metrics_if, X_test, y_test
 st.title("🔴 AI Fraud Detection System")
 st.caption("Machine Learning + Behavioral Analysis for Banking Fraud Detection")
@@ -249,4 +248,4 @@ if st.button("🔴 Analyser la transaction", type="primary"):
 
 
 if __name__ == "__main__":
-    pass        
+    pass
