@@ -3,19 +3,19 @@
 🚀 **Live Demo** : [axelle-fraud-detection.streamlit.app](https://axelle-fraud-detection.streamlit.app)
 
 A machine learning system that detects fraudulent banking transactions
-by combining two complementary ML models with behavioral psychology analysis.
+by combining two complementary ML models with a rule-based behavioural analysis.
 
 > Built for the banking and financial sector, where fraud detection combines
-> technical pattern recognition with human behavioral understanding.
+> technical pattern recognition with human behavioural understanding.
 
 ##  Features
 
 - Dual ML detection : Logistic Regression (supervised) +
   Isolation Forest (unsupervised)
 - SMOTE implementation to handle extreme class imbalance (0.17% fraud rate)
-- Behavioral Risk Profiling : psychological analysis of each suspicious transaction
-- Real-time risk scoring system (0-100) combining ML confidence + behavioral signals
-- Four fraudster psychological profiles : Opportunist, Methodical, Impulsive, Insider
+- Behavioural risk profiling of each suspicious transaction, based on timing and amount
+- Real-time risk scoring system (0-100) combining ML confidence + behavioural signals
+- Four illustrative fraudster profiles : Opportunist, Methodical, Impulsive, Insider
 - Interactive transaction analyzer with visual risk gauge
 - Modular architecture (processor / models / behavioral / dashboard)
 
@@ -33,24 +33,24 @@ by combining two complementary ML models with behavioral psychology analysis.
 ##  Installation
 
 ```bash
-# 1. Clone le repository
+# 1. Clone the repository
 git clone https://github.com/Axelle141188/ai-fraud-detection
 cd ai-fraud-detection
 
-# 2. Installe les dépendances
+# 2. Install the dependencies
 pip install -r requirements.txt
 
-# 3. Le dataset est téléchargé automatiquement depuis Kaggle au premier lancement
-# Assurez-vous d'avoir configuré vos credentials Kaggle
+# 3. The dataset is downloaded automatically from Kaggle on first launch
+#    (Kaggle credentials must be configured)
 
-# 4. Lance le dashboard
+# 4. Launch the dashboard
 streamlit run src/dashboard.py
 ```
 
-Ouvre ton navigateur sur **http://localhost:8501**
+Then open **http://localhost:8501** in your browser.
 
->  Premier lancement : les modèles s'entraînent automatiquement
-> (environ 2-3 minutes). Les lancements suivants sont instantanés.
+> First launch: the models are trained automatically (about 2-3 minutes).
+> Later launches are instant.
 
 ##  Project Structure
 
@@ -63,7 +63,7 @@ ai-fraud-detection/
 ├── src/
 │   ├── data_processor.py       # Data loading, cleaning & feature engineering
 │   ├── models.py               # ML models training & evaluation
-│   ├── behavioral.py           # Psychological profiling & risk scoring
+│   ├── behavioral.py           # Behavioural profiling & risk scoring
 │   └── dashboard.py            # Streamlit visual interface
 ├── requirements.txt
 └── README.md
@@ -71,12 +71,9 @@ ai-fraud-detection/
 
 ##  Model Performance
 
-| Metric | Logistic Regression | Isolation Forest |
-|--------|-------------------|-----------------|
-| Precision | 91.3% | 25.8% |
-| Recall | 91.3% | 25.8% |
-| F1-Score | 91.3% | 25.8% |
-| ROC-AUC | 95.6% | 62.8% |
+Metrics (precision, recall, F1-score, ROC-AUC) are computed live in the
+[demo](https://axelle-fraud-detection.streamlit.app) on a held-out, stratified
+test set (20% of the data), which is never used for training or SMOTE.
 
 **Why two models ?**
 - Logistic Regression excels at detecting known fraud patterns → recommended for production
@@ -87,14 +84,15 @@ Only 0.17% of transactions are fraudulent (492 out of 284,807).
 SMOTE was applied to balance the training data and prevent
 the model from ignoring fraud cases.
 
-##  Behavioral Analysis — The Unique Differentiator
+##  Behavioural Analysis
 
-Beyond ML metrics, this system profiles the human behavior behind each
-suspicious transaction using psychological analysis.
+Beyond ML metrics, this system adds a rule-based behavioural reading of each
+suspicious transaction. The four profiles below are illustrative hypotheses
+built from timing and amount patterns, not validated psychological diagnoses.
 
 ### Four Fraudster Profiles
 
-| Profile | Behavior | Key Indicators |
+| Profile | Behaviour | Key Indicators |
 |---------|----------|----------------|
 | 🟡 Opportunist | Acts impulsively on a single opportunity | Low amount, off-hours |
 | 🔴 Methodical | Plans carefully, tests before scaling | Micro-transactions, increasing amounts |
@@ -109,7 +107,8 @@ suspicious transaction using psychological analysis.
 ##  Dataset
 
 - **Source :** [Kaggle Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
-- **Size :** 284,807 transactions (September 2013, European cardholders)
+- **Size :** 284,807 transactions (September 2013, European cardholders),
+  283,726 after removing duplicates
 Average fraud amount : €123.87 | Maximum fraud amount : €2,125.87
 - **Features :** 30 variables (V1-V28 PCA-transformed + Time + Amount)
 - **Fraud rate :** 0.17% (492 fraudulent transactions)
@@ -121,13 +120,13 @@ consistent with real banking data handling requirements.*
 
 ##  Author
 
-**Axelle** — Aspiring Behavioral Fraud Detection Specialist
+**Axelle** — Aspiring Behavioural Fraud Detection Specialist
 
-- 🎓 Background in Psychology | Google Data Analytics Certificate
-- 🔐 CompTIA Security+ in preparation | CySA+ planned
-- 🌍 French (native) | Portuguese (native) | English (working knowledge)
+- 🎓 Background in Psychology | Google Data Analytics & Google Advanced Data Analytics Certificates
+- 🔐 CompTIA Security+ in preparation
+- 🌍 French (native) | Portuguese (bilingual) | English (strong written, intermediate spoken)
 - 🎯 Targeting fraud detection roles in the banking and financial sector
 
-*"Fraud isn't just algorithmic — it's human behavior with
+*"Fraud isn't just algorithmic — it's human behaviour with
 detectable psychological patterns. This system bridges the gap
-between technical detection and behavioral understanding."*
+between technical detection and behavioural understanding."*
