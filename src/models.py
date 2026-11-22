@@ -89,12 +89,18 @@ class FraudDetectionModels:
         else:
             y_pred = model.predict(X_test)
         
+        # ROC-AUC computed on continuous scores, not on hard 0/1 predictions
+        if model_name == 'Isolation Forest':
+            scores = -model.score_samples(X_test)
+        else:
+            scores = model.predict_proba(X_test)[:, 1]
+
         metrics = {
             'model_name': model_name,
             'precision': round(precision_score(y_test, y_pred), 4),
             'recall': round(recall_score(y_test, y_pred), 4),
             'f1_score': round(f1_score(y_test, y_pred), 4),
-            'roc_auc': round(roc_auc_score(y_test, y_pred), 4),
+            'roc_auc': round(roc_auc_score(y_test, scores), 4),
             'confusion_matrix': confusion_matrix(y_test, y_pred).tolist()
         }
         
