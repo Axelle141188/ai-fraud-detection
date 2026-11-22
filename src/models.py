@@ -170,4 +170,3 @@ if __name__ == "__main__":
     
     models = FraudDetectionModels()
     metrics_lr, metrics_if, X_test, y_test = models.train_all(X, y)
-    
